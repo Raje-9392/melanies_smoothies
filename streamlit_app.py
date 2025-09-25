@@ -9,8 +9,9 @@ st.write(
   """Choose the fruit you want in your custom Smoothie
   """)
 import streamlit as st
-streamlit.title("🥤Customize Your Smoothie!🥤")
-#import streamlit as st
+
+st.title("🥤 Customize Your Smoothie! 🥤")
+st.write("Choose the fruit you want in your custom Smoothie")
 
 #title = st.text_input('Movie title', 'Life of Brian')
 #st.write('The current movie title is', title)
