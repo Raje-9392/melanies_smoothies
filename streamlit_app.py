@@ -46,7 +46,7 @@ pd_df=my_dataframe.to_pandas()
 st.dataframe(pd-df)                                                                                         
 st.stop()
                                                                                             
-ingredients_list=st.multiselect
+ingredients_list=st.multiselect(
  #the below one is attach od above line left of multiselector                                                                                           
 #( 'chose up to 5 imgredients:',my_dataframe)
 
