@@ -8,7 +8,7 @@ st.title("🥤Customize Your Smoothie!🥤")
 st.write(
   """Choose the fruit you want in your custom Smoothie
   """)
-cnx=st.connection("snowflake")
+cnx = st.connection("snowflake")
 session=cnx.session()
 
 
