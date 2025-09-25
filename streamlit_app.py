@@ -14,7 +14,8 @@ session=cnx.session()
 
 import requests
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-st.text(smoothiefroot_response.json())
+#st.text(smoothiefroot_response.json())
+sf_df= st.dataframe(data=smoothiefroot_response.json(), use_container_width=true)
 #import streamlit as st
 
 #title = st.text_input('Movie title', 'Life of Brian')
