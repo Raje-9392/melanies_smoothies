@@ -39,11 +39,16 @@ from snowflake.snowpark.functions import col
 
 #session = get_active_session()
 st.write("Session initialized:", session)
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
-st.dataframe(data=my_dataframe, use_container_width=True)
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'),col(SEARCH_ON'))
+#st.dataframe(data=my_dataframe, use_container_width=True)
+#st.stop()
+pd_df=my_dataframe.to_pandas()
+st.dataframe(pd-df)                                                                                         
 st.stop()
-
-ingredients_list=st.multiselect( 'chose up to 5 imgredients:',my_dataframe)
+                                                                                            
+ingredients_list=st.multiselect
+ #the below one is attach od above line left of multiselector                                                                                           
+#( 'chose up to 5 imgredients:',my_dataframe)
 
 if ingredients_list:
     #st.write(ingredients_list)
