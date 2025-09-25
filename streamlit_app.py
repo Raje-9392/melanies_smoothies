@@ -8,18 +8,18 @@ st.title("🥤Customize Your Smoothie!🥤")
 st.write(
   """Choose the fruit you want in your custom Smoothie
   """)
-import streamlit as st
+cnx=st.connection("snowflake")
+session=cnx.session()
 
-st.title("🥤 Customize Your Smoothie! 🥤")
-st.write("Choose the fruit you want in your custom Smoothie")
+
+#import streamlit as st
 
 #title = st.text_input('Movie title', 'Life of Brian')
 #st.write('The current movie title is', title)
 name_on_order = st.text_input('Name on Smoothie:')
 st.write('The name on your Smoothie will be:', name_on_order)
 
-cnx=st.connection("snowflake")
-session=cnx.session()
+
 
 
 #option = st.selectbox( 'What is your favorite fruit?',('Banana', 'Strawberries', 'Peaches')
