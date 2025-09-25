@@ -48,13 +48,11 @@ if ingredients_list:
         ingredients_string += fruit_chosen + ' '
    #st.write(ingredients_string)    
 
-my_insert_stmt = (
-    "INSERT INTO smoothies.public.orders (ingredients, name_on_order) "
-    "VALUES ('" + ingredients_string + "', '" + name_on_order + "')"
-)
+ingredients_string = st.text_input("Enter ingredients")
+name_on_order = st.text_input("Enter your name")
 
-#my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
-     # values('""" + ingredients_string + """','"""+name_on_order+ """')"""
+my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
+     values('""" + ingredients_string + """','"""+name_on_order+ """')"""
    # st.write(my_insert_stmt)
     #st.stop()
 
