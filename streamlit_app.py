@@ -8,7 +8,7 @@ st.title("🥤Customize Your Smoothie!🥤")
 st.write(
   """Choose the fruit you want in your custom Smoothie
   """)
-
+import streamlit as st
 streamlit.title('🥤Customize Your Smoothie!🥤')
 #import streamlit as st
 
