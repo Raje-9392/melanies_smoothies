@@ -87,8 +87,34 @@ my_dataframe = session.table("smoothies.public.orders").filter(col('ORDER_FILLED
 #st.cache_data.clear()
 
 
+import snowflake.connector
+cur.execute("""
+    insert into ORDERS (INGREDIENTS, NAME_ON_ORDER, ORDER_FILLED)
+    values (%s, %s, %s)
+""", ("Apples, Lime, Ximenia", "Kevin", False))
 
+# 2. Divya (filled)
+cur.execute("""
+    insert into ORDERS (INGREDIENTS, NAME_ON_ORDER, ORDER_FILLED)
+    values (%s, %s, %s)
+""", ("Dragon Fruit, Guava, Figs, Jackfruit, Blueberries", "Divya", True))
 
+# 3. Xi (filled)
+cur.execute("""
+    insert into ORDERS (INGREDIENTS, NAME_ON_ORDER, ORDER_FILLED)
+    values (%s, %s, %s)
+""", ("Vanilla Fruit, Nectarine", "Xi", True))
+
+# Commit changes
+conn.commit()
+
+# Verify
+cur.execute("select * from ORDERS")
+for row in cur.fetchall():
+    print(row)
+
+cur.close()
+conn.close()
 
 
 
