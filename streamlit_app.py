@@ -94,7 +94,51 @@ my_dataframe = session.table("smoothies.public.orders").filter(col('ORDER_FILLED
 
 
 
+import streamlit as st
+import snowflake.connector
+from datetime import datetime
 
+# ❗ Replace with your Snowflake credentials
+conn = snowflake.connector.connect(
+    user="YOUR_USER",
+    password="YOUR_PASSWORD",
+    account="YOUR_ACCOUNT",
+    warehouse="YOUR_WAREHOUSE",
+    database="YOUR_DATABASE",
+    schema="YOUR_SCHEMA"
+)
+cur = conn.cursor()
+
+st.title("Smoothie Orders Lab")
+
+# Predefined orders for the lab
+orders = [
+    {"name": "Kevin", "fruits": ["Apples", "Lime", "Ximenia"], "filled": False},
+    {"name": "Divya", "fruits": ["Dragon Fruit", "Guava", "Figs", "Jackfruit", "Blueberries"], "filled": True},
+    {"name": "Xi", "fruits": ["Vanilla Fruit", "Nectarine"], "filled": True}
+]
+
+st.write("Click the button below to create the lab orders in your Snowflake table:")
+
+if st.button("Create Lab Orders"):
+    for order in orders:
+        ingredients_str = ", ".join(order["fruits"])
+        order_ts = datetime.utcnow()
+        cur.execute("""
+            insert into smoothies.public.orders (ingredients, name_on_order, order_filled, order_ts)
+            values (%s, %s, %s, %s)
+        """, (ingredients_str, order["name"], order["filled"], order_ts))
+    conn.commit()
+    st.success("Lab orders created successfully!")
+
+# Optional: show current table contents
+if st.checkbox("Show Orders Table"):
+    cur.execute("select name_on_order, ingredients, order_filled, order_ts from smoothies.public.orders")
+    rows = cur.fetchall()
+    st.dataframe(rows)
+
+cur.close()
+conn.close()
 
 
 
