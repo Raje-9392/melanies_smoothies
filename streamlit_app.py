@@ -2,7 +2,7 @@
 import streamlit as st
 import requests
 import pandas as pd
-#smoothiefroot_response = requests.get("https://fruityvice.com/api/fruit/all")
+smoothiefroot_response = requests.get("https://fruityvice.com/api/fruit/all")
 
 
 #from snowflake.snowpark import Session
@@ -71,11 +71,12 @@ if ingredients_list:
 ingredients_string = "Apples,Lime,Ximenia"   
 name_on_order = "Kevin"
 
-ingredients_string = "Dragon Fruit, Guava,Figs, Jackfruit and Blueberries"   
+ingredients_string = "Dragon Fruit,Guava,Figs,Jackfruit,Blueberries"   
 name_on_order = "Divya"
 
 ingredients_string = "Vanilla Fruit,Nectarine"   
 name_on_order = "Xi"
+
 my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
          values('""" + ingredients_string + """','"""+name_on_order+ """')"""
    # st.write(my_insert_stmt)
