@@ -5,6 +5,14 @@ import pandas as pd
 streamlit run streamlit_app.py
 smoothiefroot_response = requests.get("https://fruityvice.com/api/fruit/all")
 
+def insert_order(conn, name, ingredients, filled=False):
+    cur = conn.cursor()
+    cur.execute("""
+        insert into smoothies.public.orders (name_on_order, ingredients, order_filled, order_ts)
+        values (%s, %s, %s, current_timestamp)
+    """, (name, ", ".join(ingredients), filled))
+    cur.close()
+
 #from snowflake.snowpark import Session
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
