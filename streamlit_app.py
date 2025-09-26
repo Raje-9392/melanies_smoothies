@@ -2,7 +2,6 @@
 import streamlit as st
 import requests
 import pandas as pd
-streamlit run streamlit_app.py
 smoothiefroot_response = requests.get("https://fruityvice.com/api/fruit/all")
 
 def insert_order(conn, name, ingredients, filled=False):
