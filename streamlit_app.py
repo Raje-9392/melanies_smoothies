@@ -73,8 +73,8 @@ name_on_order = "Kevin "
 ingredients_string = "Dragon Fruit, Guava,Figs, Jackfruit and Blueberries  "   
 name_on_order = " Divya "
 
-ingredients_string = "Apples,Lime,Ximenia "   
-name_on_order = "Kevin "
+ingredients_string = " Vanilla Fruit,Nectarine  "   
+name_on_order = "Xi  "
 my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
          values('""" + ingredients_string + """','"""+name_on_order+ """')"""
    # st.write(my_insert_stmt)
