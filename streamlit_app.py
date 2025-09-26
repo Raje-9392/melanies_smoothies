@@ -100,12 +100,12 @@ from datetime import datetime
 
 # ❗ Replace with your Snowflake credentials
 conn = snowflake.connector.connect(
-    user="YOUR_USER",
-    password="YOUR_PASSWORD",
-    account="YOUR_ACCOUNT",
-    warehouse="YOUR_WAREHOUSE",
-    database="YOUR_DATABASE",
-    schema="YOUR_SCHEMA"
+    user="RAJESWARI123",
+    password="RamaKOTIreddy",
+    account="CUDBIRE-DX41696",
+    warehouse="COMPUTE_WH",
+    database="SMOOTHIES",
+    schema="PUBLIC"
 )
 cur = conn.cursor()
 
