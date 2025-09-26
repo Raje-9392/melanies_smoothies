@@ -4,13 +4,6 @@ import requests
 import pandas as pd
 smoothiefroot_response = requests.get("https://fruityvice.com/api/fruit/all")
 
-def insert_order(conn, name, ingredients, filled=False):
-    cur = conn.cursor()
-    cur.execute("""
-        insert into smoothies.public.orders (name_on_order, ingredients, order_filled, order_ts)
-        values (%s, %s, %s, current_timestamp)
-    """, (name, ", ".join(ingredients), filled))
-    cur.close()
 
 #from snowflake.snowpark import Session
 #from snowflake.snowpark.context import get_active_session
@@ -75,14 +68,14 @@ if ingredients_list:
         #sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
    #st.write(ingredients_string)    
 
-ingredients_string = "Apples,Lime,Ximenia "   
-name_on_order = "Kevin "
+ingredients_string = "Apples,Lime,Ximenia"   
+name_on_order = "Kevin"
 
-ingredients_string = "Dragon Fruit, Guava,Figs, Jackfruit and Blueberries  "   
-name_on_order = " Divya "
+ingredients_string = "Dragon Fruit, Guava,Figs, Jackfruit and Blueberries"   
+name_on_order = "Divya"
 
-ingredients_string = " Vanilla Fruit,Nectarine  "   
-name_on_order = "Xi  "
+ingredients_string = "Vanilla Fruit,Nectarine"   
+name_on_order = "Xi"
 my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
          values('""" + ingredients_string + """','"""+name_on_order+ """')"""
    # st.write(my_insert_stmt)
