@@ -65,8 +65,8 @@ if ingredients_list:
         #sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
    #st.write(ingredients_string)    
 
-ingredients_string = "Mango, Banana"   
-name_on_order = "Rajeswari"
+ingredients_string = " "   
+name_on_order = " "
 my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
          values('""" + ingredients_string + """','"""+name_on_order+ """')"""
    # st.write(my_insert_stmt)
