@@ -1,43 +1,47 @@
 # Import python packages
 import streamlit as st
+from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
-# Write directly to the app
-st.title("🥤Customize Your Smoothie! 🥤")
-st.write("Build your own smoothie by selecting your favorite ingredients!")
+st.title("🥤 Customize Your Smoothie! 🥤")
 
-# Name field
-name_on_order = st.text_input("Name on Smoothies:")
+st.write("Choose the fruits you want in your custom Smoothie!")
+
+# Name input
+name_on_order = st.text_input("Name on Smoothie:")
 st.write("The name on your Smoothie will be:", name_on_order)
 
-cnx = st.connection("snowflake")
-session = cnx.session()
+# Get Snowflake session
+session = get_active_session()
 
-# Load fruits
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+# Load the fruit list
+my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME"))
 
-# Multiselect box
-ingredients_list = st.multiselect("Choose up to 5 ingredients:", my_dataframe,max_selections=5)
+# Multi-select fruit list
+ingredients_list = st.multiselect(
+    'Choose up to 5 ingredients:',
+    my_dataframe,
+    max_selections=5
+)
 
-# Build ingredients string OUTSIDE loop
-#ingredients_string = ""
-
+# If user picked ingredients
 if ingredients_list:
-    ingredients_string = " "
 
-    for fruit_chosen in ingredients_list:
-        ingredients_string += fruit_chosen + ' '
+    # Build ingredients string
+    ingredients_string = ''
+    for fruit in ingredients_list:
+        ingredients_string += fruit + ' '
 
-    # st.write(ingredients_string)
+    # Fix INSERT statement (2 columns!)
+    my_insert_stmt = f"""
+        INSERT INTO smoothies.public.orders(INGREDIENTS, NAME_ON_ORDER)
+        VALUES ('{ingredients_string}', '{name_on_order}')
+    """
 
-    my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
-        values ('""" + ingredients_string + """' , '""" + name_on_order + """')"""
+    # Button
+    submit_clicked = st.button("Submit Order")
 
-    # st.write(my_insert_stmt)
-    # st.stop()
-
-    time_to_insert = st.button('Submit Order')
-
-    if time_to_insert:
-        session.sql(my_insert_stmt).collect()
-        st.success('Your Smoothie is ordered!', icon="🥤")
+    # If button clicked → insert + show message
+    if submit_clicked:
+        #session.sql(my_insert_stmt).collect()
+        st.success(f"Your Smoothie is ordered, {name_on_order}!", icon="✅")
